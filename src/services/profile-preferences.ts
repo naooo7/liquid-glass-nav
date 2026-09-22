@@ -2,21 +2,57 @@ import { getStore } from "@/lib/storage";
 
 const STORAGE_KEY = "fastlearner:profile-preferences:v1";
 
-type ProfilePreferences = {
+export type ProfilePreferences = {
   version: 1;
   targetInstitutionId: string | null;
   institutionThemeEnabled?: boolean;
+  displayName: string;
+  avatarUrl: string | null;
 };
 
 const emptyPreferences: ProfilePreferences = {
   version: 1,
   targetInstitutionId: null,
   institutionThemeEnabled: false,
+  displayName: "Your Profile",
+  avatarUrl: null,
 };
+
+const listeners = new Set<() => void>();
+let browserEnabled = false;
+let cachedPreferences: ProfilePreferences = emptyPreferences;
 
 function readPreferences(): ProfilePreferences {
   const stored = getStore().read<ProfilePreferences>(STORAGE_KEY);
   return stored?.version === 1 ? { ...emptyPreferences, ...stored } : emptyPreferences;
+}
+
+function notify() {
+  cachedPreferences = readPreferences();
+  listeners.forEach((listener) => listener());
+}
+
+function writePreferences(patch: Partial<ProfilePreferences>) {
+  getStore().write<ProfilePreferences>(STORAGE_KEY, { ...readPreferences(), ...patch });
+  notify();
+}
+
+export function enableBrowserProfilePreferences() {
+  if (browserEnabled || typeof window === "undefined") return;
+  browserEnabled = true;
+  notify();
+  window.addEventListener("storage", (event) => {
+    if (event.key === STORAGE_KEY) notify();
+  });
+}
+
+export function subscribeToProfilePreferences(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+export function getProfilePreferences() {
+  return cachedPreferences;
 }
 
 export function getTargetInstitutionId() {
@@ -24,10 +60,7 @@ export function getTargetInstitutionId() {
 }
 
 export function setTargetInstitutionId(targetInstitutionId: string) {
-  getStore().write<ProfilePreferences>(STORAGE_KEY, {
-    ...readPreferences(),
-    targetInstitutionId,
-  });
+  writePreferences({ targetInstitutionId });
 }
 
 export function getInstitutionThemeEnabled() {
@@ -35,8 +68,9 @@ export function getInstitutionThemeEnabled() {
 }
 
 export function setInstitutionThemeEnabled(institutionThemeEnabled: boolean) {
-  getStore().write<ProfilePreferences>(STORAGE_KEY, {
-    ...readPreferences(),
-    institutionThemeEnabled,
-  });
+  writePreferences({ institutionThemeEnabled });
+}
+
+export function setProfileIdentity(displayName: string, avatarUrl: string | null) {
+  writePreferences({ displayName: displayName.trim() || emptyPreferences.displayName, avatarUrl });
 }

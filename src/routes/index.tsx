@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Metric, Page, ProgressBar, Surface, TrendChart } from "@/components/app-ui";
 import { useTheme } from "@/hooks/use-theme";
 import { useUserData } from "@/hooks/use-user-data";
+import { useProfilePreferences } from "@/hooks/use-profile-preferences";
 import { cn } from "@/lib/utils";
 import { questionsForMaterial } from "@/data/questions";
 import {
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   useUserData();
+  const profile = useProfilePreferences();
   const { targetInstitution, institutionThemeEnabled } = useTheme();
   const hasInstitution = Boolean(targetInstitution);
   const streak = getStreak();
@@ -43,7 +45,7 @@ function HomePage() {
       <div className="relative z-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-secondary/90 px-3 py-1.5 text-sm font-semibold text-secondary-foreground backdrop-blur-sm"><Flame className="h-4 w-4 text-primary" /> {streak.current > 0 ? `${streak.current} day streak` : "Start your streak today"}</p>
-          <h1 className="font-display text-3xl font-bold md:text-5xl">{greeting}.</h1>
+          <h1 className="font-display text-3xl font-bold md:text-5xl">{greeting}{profile.displayName && profile.displayName !== "Your Profile" ? `, ${profile.displayName}` : ""}.</h1>
           <p className="mt-2 text-muted-foreground">Pick up where you left off, or start a focused session.</p>
         </div>
         {targetInstitution && <div className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card/80 p-3 shadow-soft backdrop-blur-md"><img src={targetInstitution.logo} alt={targetInstitution.shortName} className="h-10 w-10 object-contain" /><div><p className="text-xs font-bold uppercase text-muted-foreground">Target</p><p className="font-display text-sm font-bold">{targetInstitution.shortName}</p></div></div>}
