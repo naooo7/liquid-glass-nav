@@ -211,7 +211,7 @@ function QuestionPage() {
         <div className="flex items-center gap-3">
           <span
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-sm font-semibold",
+              "glass-timer inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold",
               search.challenge && remaining <= 10 ? "text-destructive" : "text-muted-foreground",
             )}
           >
