@@ -8,3 +8,4 @@
 - [x] Verify the complete persisted learning journey and remove all hardcoded analytics.
 
 - [x] Apply and verify Liquid Glass polish for the existing bottom navigation only.
+- [x] Add and verify locally persisted display-name and profile-photo editing across Profile, Home, and existing avatar surfaces.
