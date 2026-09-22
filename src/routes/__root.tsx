@@ -137,11 +137,15 @@ function RootComponent() {
         </header>
         <main className="bottom-nav-clearance"><Outlet /></main>
         <nav aria-label="Primary navigation" className="bottom-nav-glass fixed inset-x-3 z-50 mx-auto grid max-w-lg grid-cols-5 rounded-[1.65rem] border p-1.5 md:hidden">
-          {navItems.map(({ label, to, icon: Icon }) => (
+          {[navItems[1], navItems[2], navItems[0], navItems[3], navItems[4]].map((item) => {
+            if (!item) return null;
+            const { label, to, icon: Icon } = item;
+            return (
             <Link key={to} to={to} activeOptions={{ exact: to === "/" }} className={`bottom-nav-item flex min-h-14 flex-col items-center justify-center gap-1 rounded-[1.2rem] px-1 text-[11px] font-semibold ${to === "/" ? "bottom-nav-home" : ""}`} activeProps={{ className: "bottom-nav-item-active" }}>
               <Icon className="h-[18px] w-[18px]" strokeWidth={2} />{label}
             </Link>
-          ))}
+            );
+          })}
         </nav>
         </div>
       </ThemeProvider>
