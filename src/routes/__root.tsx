@@ -14,6 +14,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider } from "../hooks/use-theme";
 import { Button } from "@/components/ui/button";
+import { ProfileAvatar } from "@/components/profile-avatar";
+import { useProfilePreferences } from "@/hooks/use-profile-preferences";
 
 function NotFoundComponent() {
   return (
@@ -119,6 +121,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const profile = useProfilePreferences();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -132,7 +135,7 @@ function RootComponent() {
                 <Link key={to} to={to} activeOptions={{ exact: to === "/" }} className="rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" activeProps={{ className: "bg-secondary text-foreground" }}>{label}</Link>
               ))}
             </nav>
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary font-semibold text-foreground">FL</div>
+            <ProfileAvatar displayName={profile.displayName} avatarUrl={profile.avatarUrl} className="h-9 w-9" fallbackClassName="bg-secondary font-semibold text-foreground" />
           </div>
         </header>
         <main className="bottom-nav-clearance"><Outlet /></main>
