@@ -7,4 +7,4 @@
 - [x] Fix mobile Light Mode contrast and verify 320px, 375px, 390px, desktop, Light/Dark/System, and all institutions.
 - [x] Verify the complete persisted learning journey and remove all hardcoded analytics.
 
-- [ ] Apply and verify Liquid Glass polish for the existing bottom navigation only.
+- [x] Apply and verify Liquid Glass polish for the existing bottom navigation only.
