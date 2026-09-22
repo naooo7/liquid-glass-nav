@@ -107,11 +107,11 @@
   --shadow-soft: 0 1px 2px oklch(0.2 0.02 55 / 0.03), 0 10px 30px oklch(0.2 0.02 55 / 0.035);
   --shadow-float: 0 12px 40px oklch(0.2 0.02 55 / 0.12);
   --shadow-button: 0 7px 20px oklch(0.42 0.07 55 / 0.2);
-  --nav-glass: oklch(0.995 0.004 90 / 0.72);
-  --nav-glass-edge: oklch(1 0 0 / 0.72);
-  --nav-glass-inner: oklch(1 0 0 / 0.46);
-  --nav-glass-active: color-mix(in oklch, var(--primary) 13%, oklch(1 0 0 / 0.56));
-  --nav-glass-shadow: 0 18px 48px oklch(0.2 0.02 55 / 0.13), 0 3px 12px oklch(0.2 0.02 55 / 0.06);
+  --nav-glass: oklch(0.93 0.008 255 / 0.72);
+  --nav-glass-edge: oklch(1 0 0 / 0.68);
+  --nav-glass-inner: oklch(1 0 0 / 0.4);
+  --nav-glass-active: color-mix(in oklch, var(--primary) 11%, oklch(0.97 0.006 255 / 0.62));
+  --nav-glass-shadow: 0 16px 42px oklch(0.2 0.015 255 / 0.12), 0 3px 10px oklch(0.2 0.015 255 / 0.06);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -174,11 +174,11 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
-  --nav-glass: oklch(0.22 0.022 45 / 0.72);
+  --nav-glass: oklch(0.24 0.01 255 / 0.74);
   --nav-glass-edge: oklch(1 0 0 / 0.14);
   --nav-glass-inner: oklch(1 0 0 / 0.08);
-  --nav-glass-active: color-mix(in oklch, var(--primary) 17%, oklch(0.28 0.025 45 / 0.7));
-  --nav-glass-shadow: 0 20px 52px oklch(0.06 0.01 45 / 0.38), 0 3px 12px oklch(0.06 0.01 45 / 0.2);
+  --nav-glass-active: color-mix(in oklch, var(--primary) 15%, oklch(0.32 0.012 255 / 0.72));
+  --nav-glass-shadow: 0 18px 46px oklch(0.06 0.008 255 / 0.36), 0 3px 10px oklch(0.06 0.008 255 / 0.2);
 }
 
 @layer base {
