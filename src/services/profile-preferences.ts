@@ -6,8 +6,8 @@ export type ProfilePreferences = {
   version: 1;
   targetInstitutionId: string | null;
   institutionThemeEnabled?: boolean;
-  displayName?: string;
-  avatarUrl?: string | null;
+  displayName: string;
+  avatarUrl: string | null;
 };
 
 const emptyPreferences: ProfilePreferences = {
